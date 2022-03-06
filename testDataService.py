@@ -1,10 +1,13 @@
-import unittest
+from unittest import TestCase
+from config import test_content
 
 
-class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, False)  # add assertion here
+test_file = open(test_content)
+
+class TestFindStatsTable(TestCase):
+    def test_get_stat_categories(self):
+        from dataScrape import get_web_content
+        from config import urls
+        self.assertEqual(get_web_content(urls['per_game']).status_code, 200)
 
 
-if __name__ == '__main__':
-    unittest.main()

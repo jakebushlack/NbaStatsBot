@@ -17,7 +17,8 @@ class TestTableHasContent(TestCase):
 
 class TestHeadersReturnContent(TestCase):
     def test_get_stat_categories(self):
-        from dataScrape import get_table, get_web_content, get_stat_categories
+        from dataScrape import get_table, get_web_content
+        from dataService import get_stat_categories
         from config import urls
         stat_cats_text = get_stat_categories(get_table(get_web_content(urls['per_game']))).stat_categories_text
         self.assertGreater(len(stat_cats_text), 0)

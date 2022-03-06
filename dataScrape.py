@@ -1,8 +1,10 @@
+import datetime
 import types
 
 import requests
 import csv
 from bs4 import BeautifulSoup
+from config import urls
 
 
 def get_web_content(_url):
@@ -18,22 +20,32 @@ def get_table(_request):
 
     return table
 
+
 def save_table_to_csv(_table):
-    file_name = _table["id"]
+    file_name = str(_table["id"] + '_' + str(datetime.date.today()))
     if len(_table) > 0:
-        header = _table.find("thead").find("tr").select("[aria-label]")
+        header = _table.find("thead").find("tr").find_all("th")
+        output_header = ''
+        for head in header:
+            if head.text != 'Rk':
+                output_header += str(head['data-stat'] + ',')
+
+        output_header = output_header[0:-1]
         body = _table.find("tbody")
         rows = body.find_all("tr", "full_table")
-        row_contents = ''
         print(len(rows))
-        for row in rows:
-            name = ''
-            last_first = row.find("td", {"data-stat": "player"})
-            if len(last_first) > 0:
-                name = last_first["csk"]
+        with open(file_name, 'w', encoding='UTF-8') as csv_file:
+            csv_file.write(str(output_header) + '\n')
+            for row in rows:
+                row_contents = ''
+                columns = row.find_all("td")
+                for col in columns:
+                    row_contents += (str(col.text) + ',')
+                row_contents = row_contents[0:-1]
+                print(row_contents)
+                csv_file.write(str(row_contents) + '\n')
 
-            columns = row.find_all("td")
-            print(name)
-            for col in columns:
-                content = col.text
 
+response = get_web_content(urls['per_game'])
+table = get_table(response)
+save_table_to_csv(table)

@@ -1,13 +1,16 @@
+import csv
 import types
 
+import config
 from StatCategories import StatCategories
 from Player import Player
 
-def get_stat_categories(_table):
+
+def get_stat_categories(_file_name):
     stat_categories = StatCategories()
 
-    if len(_table) > 0:
-        header = _table.find("thead").find("tr").select("[aria-label]")
+    if len(_file_name) > 0:
+        header = _file_name.find("thead").find("tr").select("[aria-label]")
         for col in header:
             stat_categories.stat_categories_text.append(col.text)
             stat_categories.stat_categories_concise.append(col['data-stat'])
@@ -18,35 +21,34 @@ def get_stat_categories(_table):
     return stat_categories
 
 
-def get_player_data(_table):
+def get_player_data(_file_name):
     players = []
-    body = _table.find("tbody")
-    rows = body.find_all("tr", "full_table")
-    print(len(rows))
-    for row in rows:
-        columns = row.find_all("td")
-        player = Player(columns)
-        for col in columns:
-            player.adding_new_attr(str(col['data-stat']), str(col.text))
-            print('"' + str(col['data-stat']) + '"' + ": " + '"' + str(col.text) + '"')
-        players.append(player)
+    with open(_file_name, encoding='UTF-8') as stats_file:
+        csv_reader = list(csv.reader(stats_file, delimiter=','))
+        header = csv_reader[0]
+        row_count = 0
+        for row in csv_reader:
+            column_count = 0
+            if row_count == 0:
+                row_count += 1
+                continue
+            player = Player(header[column_count], row[column_count])
+            print(player.player)
+            for stat in row:
+                player.adding_new_attr(header[column_count], stat)
+                column_count += 1
+            players.append(player)
+            row_count += 1
+        print(header)
 
-    print(len(players))
-    print(players[0].pos)
 
-def get_player_stats(_table, _name):
-    body = _table.find("tbody")
-    player_row = body.find_all("tr", "full_table")
-
-
-def join_player_data(_player, _stats):
+def join_player_data(_player, _header, _stats):
+    # for each stat, check the existing player object for existing stats and skip.
+    # for unique/new stats, add to player
+    for stat in _stats:
+        if not getattr(_player, stat, 'null') == 'null':
+            _player.adding_new_attr(_header.value, stat.value)
     return []
 
 
-# content = get_web_content(urls['per_game'])
-# table = get_table(content)
-# stat_categories = get_stat_categories(table)
-#
-# # get_player_data(table, stat_categories)
-# # print(table["id"])
-# save_table_to_csv(table)
+get_player_data("stat_files/per_game_stats")

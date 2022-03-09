@@ -22,7 +22,7 @@ def get_table(_request):
 
 
 def save_table_to_csv(_table):
-    file_name = str(_table["id"] + '_' + str(datetime.date.today()))
+    file_name =  "stat_files/" +  str(_table["id"])  # + '_' + str(datetime.date.today()))
     if len(_table) > 0:
         header = _table.find("thead").find("tr").find_all("th")
         output_header = ''

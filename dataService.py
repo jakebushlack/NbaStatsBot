@@ -39,7 +39,6 @@ def get_player_data(_file_name):
                 column_count += 1
             players.append(player)
             row_count += 1
-        print(header)
 
 
 def join_player_data(_player, _header, _stats):

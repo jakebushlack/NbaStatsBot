@@ -20,7 +20,7 @@ def get_table(_web_content):
 
 
 def save_table_to_csv(_table):
-    file_name = ("stat_files/%s.csv" % str(_table["id"]))
+    file_name = (f'stat_files/{str(_table["id"])}.csv')
 
     if len(_table) > 0:
         header = _table.find("thead").find("tr").find_all("th")

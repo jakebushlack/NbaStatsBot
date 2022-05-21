@@ -5,4 +5,7 @@ urls = {
     'per_poss': 'https://www.basketball-reference.com/leagues/NBA_2022_per_poss.html'
 }
 
-test_content = 'test_html.html'
+test_content = {
+    'test_html': 'test_html.html',
+    'test_csv': ['per_game', 'totals']
+}

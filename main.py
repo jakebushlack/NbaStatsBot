@@ -4,4 +4,4 @@ from config import urls
 
 get_web_content()
 
-new_get_player_data({})
+get_player_data({})

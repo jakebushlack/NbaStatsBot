@@ -41,3 +41,5 @@ def get_player_data(_player_dict):
                 _player_dict[player_name] = player_dict_value
 
                 row_index += 1
+
+    return _player_dict

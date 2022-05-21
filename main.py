@@ -4,4 +4,5 @@ from config import urls
 
 get_web_content()
 
-get_player_data({})
+player_dict = get_player_data({})
+

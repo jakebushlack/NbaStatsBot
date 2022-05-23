@@ -4,13 +4,14 @@ from bs4 import BeautifulSoup
 import config
 
 
-def get_web_content():
-    for _url in config.urls.values():
-        logging.debug(f'Requesting web content for {_url}')
-        r = requests.get(_url)
-        table = get_table(r.content)
-        logging.debug(f'Content for {_url} retrieved')
-        save_table_to_csv(table)
+def get_web_content(_url):
+    logging.debug(f'Requesting web content for {_url}')
+    r = requests.get(_url)
+    table = get_table(r.content)
+    logging.debug(f'Content for {_url} retrieved')
+    save_table_to_csv(table)
+
+    return r.status_code
 
 
 def get_table(_web_content):

@@ -1,3 +1,4 @@
+import logging
 import requests
 from bs4 import BeautifulSoup
 import config
@@ -5,8 +6,10 @@ import config
 
 def get_web_content():
     for _url in config.urls.values():
+        logging.debug(f'Requesting web content for {_url}')
         r = requests.get(_url)
         table = get_table(r.content)
+        logging.debug(f'Content for {_url} retrieved')
         save_table_to_csv(table)
 
 
@@ -20,11 +23,15 @@ def get_table(_web_content):
 
 
 def save_table_to_csv(_table):
-    file_name = (f'stat_files/{str(_table["id"])}.csv')
+    file_name = f'stat_files/{str(_table["id"])}.csv'
+
+    logging.debug(f'Beginning parse table to csv')
 
     if len(_table) > 0:
         header = _table.find("thead").find("tr").find_all("th")
         output_header = ''
+
+        logging.debug(f'Building stat header')
 
         for head in header:
             if head.text != 'Rk':
@@ -32,10 +39,13 @@ def save_table_to_csv(_table):
 
         output_header = output_header[0:-1]
         body = _table.find("tbody")
+
         rows = body.find_all("tr", "full_table")
 
         with open(file_name, 'w', encoding='UTF-8') as csv_file:
             csv_file.write(str(output_header) + '\n')
+
+            logging.debug(f'Building player rows')
 
             for row in rows:
                 row_contents = ''
@@ -46,4 +56,7 @@ def save_table_to_csv(_table):
 
                 row_contents = row_contents[0:-1]
                 csv_file.write(str(row_contents) + '\n')
+
+        logging.debug(f'Data table saved to {file_name}')
+
 

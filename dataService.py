@@ -1,5 +1,6 @@
 import csv
 import config
+import logging
 from Player import Player
 
 
@@ -8,6 +9,9 @@ def get_player_data(_player_dict):
     for file_name in config.urls.keys():
 
         with open(f'stat_files/{file_name}_stats.csv', encoding='UTF-8') as stats_file:
+
+            logging.info(f'Merging data from {file_name}')
+
             csv_reader = list(csv.reader(stats_file, delimiter=','))
             header = csv_reader[0]
             row_index = 0
@@ -23,6 +27,8 @@ def get_player_data(_player_dict):
                 player_name = getattr(player, 'player')
 
                 if not _player_dict.get(player_name):  # if we can't find this row's player obj by key in the player dictionary
+
+                    logging.debug(f'Adding new player {player_name} to player dictionary')
 
                     for stat in row:
                         player.adding_new_attr(header[col_index], stat)  # add the rest of the stats from the row to the current player obj

@@ -4,27 +4,25 @@ from bs4 import BeautifulSoup
 import config
 
 
-def get_web_content(_url):
+def get_web_content(_url): # should just do the web request and return the request
     logging.debug(f'Requesting web content for {_url}')
     r = requests.get(_url)
-    table = get_table(r.content)
     logging.debug(f'Content for {_url} retrieved')
-    save_table_to_csv(table)
 
-    return r.status_code
-
-
-def get_table(_web_content):
-    table = ''
-    if len(_web_content) > 0:
-        soup = BeautifulSoup(_web_content, 'html.parser')
-        table = soup.find("table", {"class": "stats_table"})
-
-    return table
+    return r
 
 
-def save_table_to_csv(_table):
+def content_to_html(_web_content):
+    return BeautifulSoup(_web_content, 'html.parser')
+
+
+def get_table_from_html(_web_html): # should take the request and find the table Tag
+    return _web_html.find("table", {"class": "stats_table"})
+
+
+def save_table_to_csv(_table): # should take the table Tag and save its contents to a .csv
     file_name = f'stat_files/{str(_table["id"])}.csv'
+    # print(type(_table))
 
     logging.debug(f'Beginning parse table to csv')
 
@@ -60,4 +58,13 @@ def save_table_to_csv(_table):
 
         logging.debug(f'Data table saved to {file_name}')
 
+
+def get_and_save(_url):
+    content = get_web_content(_url).content
+    html = content_to_html(content)
+    table = get_table_from_html(html)
+    save_table_to_csv(table)
+
+
+# save_table_to_csv(get_table(r.content))
 

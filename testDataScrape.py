@@ -12,7 +12,7 @@ class DataScrapeTest(TestCase):
     def test_get_table(self):
         from dataScrape import get_table_from_html
         with open(config.test_content['test_html'], "r", encoding="utf-8") as test_html:
-            table = get_table_from_html(BeautifulSoup(test_html.read(), 'html.parser'))
+            table = get_table_from_html(test_html.read())
             self.assertGreater(len(table), 0)
             self.assertTrue(type(table) == element.Tag)
 

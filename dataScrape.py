@@ -16,8 +16,9 @@ def content_to_html(_web_content):
     return BeautifulSoup(_web_content, 'html.parser')
 
 
-def get_table_from_html(_web_html): # should take the request and find the table Tag
-    return _web_html.find("table", {"class": "stats_table"})
+def get_table_from_html(_web_content): # should take the request and find the table Tag
+    soup = BeautifulSoup(_web_content, 'html.parser')
+    return soup.find("table", {"class": "stats_table"})
 
 
 def save_table_to_csv(_table): # should take the table Tag and save its contents to a .csv
@@ -61,8 +62,7 @@ def save_table_to_csv(_table): # should take the table Tag and save its contents
 
 def get_and_save(_url):
     content = get_web_content(_url).content
-    html = content_to_html(content)
-    table = get_table_from_html(html)
+    table = get_table_from_html(content)
     save_table_to_csv(table)
 
 

@@ -17,13 +17,12 @@ def content_to_html(_web_content):
 
 
 def get_table_from_html(_web_content): # should take the request and find the table Tag
-    soup = BeautifulSoup(_web_content, 'html.parser')
+    soup = content_to_html(_web_content)
     return soup.find("table", {"class": "stats_table"})
 
 
 def save_table_to_csv(_table): # should take the table Tag and save its contents to a .csv
     file_name = f'stat_files/{str(_table["id"])}.csv'
-    # print(type(_table))
 
     logging.debug(f'Beginning parse table to csv')
 

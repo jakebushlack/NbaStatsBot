@@ -2,6 +2,10 @@ import csv
 import config
 from bs4 import BeautifulSoup, element
 from unittest import TestCase
+import io
+import codecs
+
+
 
 
 class DataScrapeTest(TestCase):
@@ -18,8 +22,10 @@ class DataScrapeTest(TestCase):
 
     def test_save_csv(self):
         from dataScrape import get_table_from_html, save_table_to_csv
-        with open(config.test_content['test_html'], "r", encoding="utf-8") as test_html:
-            table = get_table_from_html(BeautifulSoup(test_html.read(), 'html.parser'))
+        with open('test_html.html', 'r', encoding="utf-8") as test_html:
+            encoded_html = codecs.encode(test_html.read(), encoding="utf-8")
+
+            table = get_table_from_html(encoded_html)
             save_table_to_csv(table)
             with open('stat_files/test_table.csv', "r", encoding="utf-8") as test_csv:
                 csv_reader = list(csv.reader(test_csv, delimiter=','))

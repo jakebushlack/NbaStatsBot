@@ -22,7 +22,7 @@ class DataScrapeTest(TestCase):
 
     def test_save_csv(self):
         from dataScrape import get_table_from_html, save_table_to_csv
-        with open('test_html.html', 'r', encoding="utf-8") as test_html:
+        with open(config.test_content['test_html'], 'r', encoding="utf-8") as test_html:
             encoded_html = codecs.encode(test_html.read(), encoding="utf-8")
 
             table = get_table_from_html(encoded_html)

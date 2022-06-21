@@ -1,6 +1,7 @@
 import csv
 import config
 import logging
+import statGetter
 from Player import Player
 
 
@@ -49,5 +50,6 @@ def get_player_data(_file_name, _player_dict):
     logging.debug(f'Number of attributes on each player: {len(dir(_player_dict["Marcus Smart"]))}')
 
     return _player_dict
+
 
 

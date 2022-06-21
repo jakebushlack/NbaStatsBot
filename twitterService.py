@@ -1,10 +1,11 @@
 import twitterClient
+import statToEnglishMapper
 
-response = twitterClient.client.create_tweet(text='we back')
 
+def generateTweet(player_dict, players_of_interest, stats):
+    outstring = f'Players in the top ten in {statToEnglishMapper.statsInEnglish[stats[0]]}, {statToEnglishMapper.statsInEnglish[stats[1]]}, {statToEnglishMapper.statsInEnglish[stats[2]]}\n'
 
-def generateTweet(players, stats):
-    print(f'Players in the top ten in {stats[0]}, {stats[1]}, {stats[2]}')
-    for player in players:
-        print(f'{player_name}: {stats_val[0]}, {stats_val[1]}, {stats_val[2]}')
-    return 0
+    for each_player in players_of_interest:
+        outstring += f'{each_player}, {statToEnglishMapper.statsInEnglish[stats[0]]}: {getattr(player_dict[each_player], stats[0])}, {statToEnglishMapper.statsInEnglish[stats[1]]}: {getattr(player_dict[each_player], stats[1])}, {statToEnglishMapper.statsInEnglish[stats[2]]}: {getattr(player_dict[each_player], stats[2])}\n'
+    print(outstring)
+    twitterClient.client.create_tweet(text=outstring)

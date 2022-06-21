@@ -13,18 +13,14 @@ def randomize_attribute(custom_player_attributes):
 
 
 def remove_default_attributes(player):
-    print("hi")
 
     all_player_attributes = list(dir(player))
     custom_player_attributes = []
-    print(f'len of dict list {len(all_player_attributes)}')
     stats_that_arent_stats = ['player', 'stats', 'team_id', 'adding_new_attr', '', 'pos']
 
     for thing in all_player_attributes:
         if not thing.endswith("__") and thing not in stats_that_arent_stats:
             custom_player_attributes.append(thing)
-
-    print(f'len of dict list {len(custom_player_attributes)}')
 
     return custom_player_attributes
 

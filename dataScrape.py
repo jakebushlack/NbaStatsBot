@@ -1,10 +1,9 @@
 import logging
 import requests
 from bs4 import BeautifulSoup
-import config
 
 
-def get_web_content(_url): # should just do the web request and return the request
+def get_web_content(_url):  # should just do the web request and return the request
     logging.debug(f'Requesting web content for {_url}')
     r = requests.get(_url)
     logging.debug(f'Content for {_url} retrieved')
@@ -16,12 +15,12 @@ def content_to_html(_web_content):
     return BeautifulSoup(_web_content, 'html.parser')
 
 
-def get_table_from_html(_web_content): # should take the request and find the table Tag
+def get_table_from_html(_web_content):  # should take the request and find the table Tag
     soup = content_to_html(_web_content)
     return soup.find("table", {"class": "stats_table"})
 
 
-def save_table_to_csv(_table): # should take the table Tag and save its contents to a .csv
+def save_table_to_csv(_table):  # should take the table Tag and save its contents to a .csv
     file_name = f'stat_files/{str(_table["id"])}.csv'
 
     logging.debug(f'Beginning parse table to csv')

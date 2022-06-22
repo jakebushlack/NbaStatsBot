@@ -1,17 +1,14 @@
 import csv
 import config
-from bs4 import BeautifulSoup, element
+from bs4 import element
 from unittest import TestCase
-import io
 import codecs
-
-
 
 
 class DataScrapeTest(TestCase):
     def test_get_web_content(self):
         from dataScrape import get_web_content
-        self.assertEqual(get_web_content(config.urls['totals']).content, 200)
+        self.assertEqual(get_web_content(config.urls['totals']).status_code, 200)
 
     def test_get_table(self):
         from dataScrape import get_table_from_html
@@ -30,4 +27,3 @@ class DataScrapeTest(TestCase):
             with open('stat_files/test_table.csv', "r", encoding="utf-8") as test_csv:
                 csv_reader = list(csv.reader(test_csv, delimiter=','))
                 self.assertGreater(len(csv_reader), 0)
-

@@ -14,5 +14,5 @@ urls = {
 
 test_content = {
     'test_html': 'test_html.html',
-    'test_csv': ['per_game', 'totals']
+    'test_table': 'stat_files/test_table_stats.csv'
 }

@@ -63,7 +63,3 @@ def get_and_save(_url):
     content = get_web_content(_url).content
     table = get_table_from_html(content)
     save_table_to_csv(table)
-
-
-# save_table_to_csv(get_table(r.content))
-

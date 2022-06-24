@@ -10,7 +10,7 @@ test_file = test_content['test_table']
 class TestFindStatsTable(TestCase):
     def test_open_test_csv(self):
         with open(test_file, encoding='UTF-8') as test_csv:
-            self.assertGreater(len(test_csv.read()), 0)
+            self.assertGreater(len(test_csv.readlines()), 0)
 
     def test_find_stats_table(self):
         player_dict = get_player_data('test_table', {})

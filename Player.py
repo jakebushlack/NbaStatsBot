@@ -13,7 +13,14 @@ class Player:
     def get_custom_stat_attributes(self):
         all_player_attributes = list(dir(self))
         custom_player_attributes = []
-        stats_that_arent_stats = ['player', 'stats', 'team_id', 'adding_new_attr', '', 'pos']
+        stats_that_arent_stats = ['',
+                                  'player',
+                                  'stats',
+                                  'team_id',
+                                  'pos',
+                                  'get_custom_stat_attributes',
+                                  'get_three_random_attributes',
+                                  'adding_new_attr']
 
         for thing in all_player_attributes:
             if not thing.endswith("__") and thing not in stats_that_arent_stats:

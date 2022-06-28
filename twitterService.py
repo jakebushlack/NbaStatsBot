@@ -1,4 +1,5 @@
 import statToEnglishMapper
+import twitterClient
 
 
 def generate_tweet(player_dict, players_of_interest, stats):
@@ -14,4 +15,4 @@ def generate_tweet(player_dict, players_of_interest, stats):
                      f'{statToEnglishMapper.statsInEnglish[stats[2]]}: {getattr(player_dict[each_player], stats[2])}\n'
 
     print(outstring)
-    # twitterClient.client.create_tweet(text=outstring)
+    twitterClient.client.create_tweet(text=outstring)

@@ -47,7 +47,7 @@
  [],
  False,
  False,
- 1656429276,
+ 1656448684,
  [('run.exe',
    'C:\\Users\\jacbus01\\PycharmProjects\\NbaStatsBot\\venv\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit\\run.exe',
    'EXECUTABLE')])

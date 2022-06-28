@@ -47,7 +47,7 @@ statsInEnglish = {
     , 'ft_per_mp': 'FT36min'
     , 'ft_per_poss': 'FT/100poss'
     , 'fta': 'FTA'
-    , 'fta_per_g': 'FTA,g'
+    , 'fta_per_g': 'FTA/g'
     , 'fta_per_mp': 'FTA/36min'
     , 'fta_per_poss': 'FTA/100poss'
     , 'g': 'Games played'

@@ -1,10 +1,6 @@
 import datetime
 import logging
 
-logging.basicConfig(filename=f'logs/log_output_{datetime.date.today()}.log', filemode='w',
-                    format='%(asctime)s | %(levelname)s | %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
-                    encoding='utf-8', level=logging.DEBUG)
-
 urls = {
     'per_game': 'https://www.basketball-reference.com/leagues/NBA_2022_per_game.html',
     'totals': 'https://www.basketball-reference.com/leagues/NBA_2022_totals.html',
@@ -16,3 +12,8 @@ test_content = {
     'test_html': 'test_html.html',
     'test_table': 'stat_files/test_table_stats.csv'
 }
+
+stat_files_path = 'C:/Users/jacbus01/PycharmProjects/NbaStatsBot/stat_files'
+log_files_path = 'C:/Users/jacbus01/PycharmProjects/NbaStatsBot/logs'
+
+# logging configuration in setup.py

@@ -6,6 +6,7 @@ def get_table_from_html(_html):  # should take the request and find the table Ta
 
 
 def save_table_to_csv(_table):  # should take the table Tag and save its contents to a .csv
+
     file_name = f'stat_files/{str(_table["id"])}.csv'
 
     logging.debug(f'Beginning parse table to csv')
@@ -60,4 +61,6 @@ def write_text_to_csv(_file_name, _header_row, _stat_rows):
 
 def get_table_from_html_and_save_as_csv(_html):
     table = get_table_from_html(_html)
+    logging.debug('Saving data to csv')
     save_table_to_csv(table)
+    logging.debug('Data saved to csv')

@@ -1,3 +1,5 @@
+import logging
+
 from random import randint
 
 
@@ -22,6 +24,7 @@ class Player:
                                   'get_three_random_attributes',
                                   'adding_new_attr']
 
+        logging.debug('Trimming default attributes from Player object')
         for thing in all_player_attributes:
             if not thing.endswith("__") and thing not in stats_that_arent_stats:
                 custom_player_attributes.append(thing)
@@ -29,6 +32,8 @@ class Player:
         return custom_player_attributes
 
     def get_three_random_attributes(self):
+        logging.debug('Randomizing 3 stat categories')
+
         selected_attributes = []
         custom_stat_attributes = self.get_custom_stat_attributes()
 

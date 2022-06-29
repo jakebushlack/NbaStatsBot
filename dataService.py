@@ -1,5 +1,6 @@
 import csv
 import logging
+
 from Player import Player
 
 
@@ -7,7 +8,7 @@ def get_player_data(_file_name, _player_dict):
 
     with open(f'stat_files/{_file_name}_stats.csv', encoding='UTF-8') as stats_file:
 
-        logging.info(f'Merging data from {_file_name}')
+        logging.debug(f'Merging data from {_file_name}')
 
         csv_reader = list(csv.reader(stats_file, delimiter=','))
         header = csv_reader[0]

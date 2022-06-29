@@ -1,6 +1,3 @@
-import datetime
-import logging
-
 urls = {
     'per_game': 'https://www.basketball-reference.com/leagues/NBA_2022_per_game.html',
     'totals': 'https://www.basketball-reference.com/leagues/NBA_2022_totals.html',

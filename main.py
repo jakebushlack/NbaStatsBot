@@ -8,7 +8,6 @@ from htmlTableReader import get_table_from_html_and_save_as_csv
 
 
 setup.ensure_logs_dir_exists(config.log_files_path)
-setup.configure_logging()
 setup.ensure_stat_files_dir_exists(config.stat_files_path)
 
 

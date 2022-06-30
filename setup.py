@@ -6,6 +6,7 @@ import os
 def ensure_logs_dir_exists(logs_path):
     if not os.path.exists(logs_path):
         os.makedirs(logs_path)
+    configure_logging()
 
 
 def configure_logging():
